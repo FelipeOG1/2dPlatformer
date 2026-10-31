@@ -1,0 +1,19 @@
+﻿# Visual Studio user-specific files
+*.vcxproj.user
+*.suo
+.vs/
+
+# Build output directories
+x64/
+Debug/
+Release/
+bin/
+obj/
+
+# Operating system generated files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Binaries / DLLs
+*.dll
