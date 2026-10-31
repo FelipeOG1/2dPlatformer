@@ -16,8 +16,9 @@ class Camera {
 public:
    void followTarget(Player& player, Display& display) {
        Vec2 playerPos = player.getPosition();
-       position.x = player.x + (targetW / 2.0f) - (windowW);
-       position.y = targetPosition.y + (targetH / 2.0f) - (windowH);
+
+       position.x = playerPos.x + (player.getWidth() / 2.0f) - (display.getWidth());
+       position.y = playerPos.y + (player.getHeight() / 2.0f) - (display.getHeight());
    }
     const Vec2 getCameraPosition() const { return position; }
        
@@ -64,9 +65,11 @@ public:
         if (renderer) SDL_DestroyRenderer(renderer);
         if (window) SDL_DestroyWindow(window);
     }
+    
     int getWidth() const { return windowW; };
-    
-    
+    int getHeight() const { return windowW; };
+
+      
 };
 
 
