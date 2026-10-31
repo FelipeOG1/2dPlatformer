@@ -7,6 +7,27 @@ struct Vec2 {
     float y;
 };
 
+
+//render position =  world position - playher
+class Camera {
+   Vec2 position;
+   
+   
+public:
+   void followTarget(Player& player, Display& display) {
+       Vec2 playerPos = player.getPosition();
+       position.x = player.x + (targetW / 2.0f) - (windowW);
+       position.y = targetPosition.y + (targetH / 2.0f) - (windowH);
+   }
+    const Vec2 getCameraPosition() const { return position; }
+       
+   
+
+ 
+    
+    
+};
+
 namespace Colors {
     constexpr SDL_Color BLACK = { 0, 0, 0, 255 };
     constexpr SDL_Color RED = { 255, 0,   0,   255 };
@@ -18,11 +39,11 @@ class Display {
 private:
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr; 
-    int window_w;
-    int window_h;
+    int windowW;
+    int windowH;
 public:
-    Display(const char* window_name) : window_w(600), window_h(600) {
-        window = SDL_CreateWindow(window_name, window_w, window_h, 0);
+    Display(const char* window_name) : windowW(600), windowH(600) {
+        window = SDL_CreateWindow(window_name, windowW, windowH, 0);
         renderer = SDL_CreateRenderer(window, nullptr);
     }
     void setDrawColor(SDL_Color color) {
@@ -37,16 +58,15 @@ public:
     void present() { 
         SDL_RenderPresent(renderer);
     }
-    
-    Vec2 getCenterScreen() {
-        return {wid}
-    }
-    
+      
     SDL_Renderer* get_render() const { return renderer; }
     ~Display() {
         if (renderer) SDL_DestroyRenderer(renderer);
         if (window) SDL_DestroyWindow(window);
     }
+    int getWidth() const { return windowW; };
+    
+    
 };
 
 
@@ -79,27 +99,36 @@ public:
         speed(300.0f),
         worldPosition(spawnPosition) {}
   
-    SDL_FRect get_screnn_rect() const { return {position.x, position.y, w, h}; };
-    
-    void draw(Display& display) {
-        SDL_FRect rect = get_rect();
+    SDL_FRect get_rect(const Vec2& cameraPosition) const {
+        return {
+            worldPosition.x - cameraPosition.x,
+            worldPosition.y - cameraPosition.y,
+            w,
+            h
+        };
+        
+    };
+  
+    void draw(Display& display, const Camera& camera) {
+        SDL_FRect rect = get_rect(camera.getCameraPosition());
         display.setDrawColor(Colors::RED);
         SDL_RenderFillRect(display.get_render(), &rect);
         SDL_RenderRect(display.get_render(), &rect);
     }
     void update(float deltatime) {
         const bool* keystate = SDL_GetKeyboardState(NULL);
-        if (keystate[SDL_SCANCODE_D]) {
-            position.x += speed * deltatime;
-            
-        }
-        if (keystate[SDL_SCANCODE_A]) {
-            position.x -= speed * deltatime;
-     
-        }
-        
-        
+        if (keystate[SDL_SCANCODE_D]) worldPosition.x += speed * deltatime;
+        if (keystate[SDL_SCANCODE_A]) worldPosition.x -= speed * deltatime;
+        if (keystate[SDL_SCANCODE_S]) worldPosition.y += speed * deltatime;
+        if (keystate[SDL_SCANCODE_W]) worldPosition.y -= speed * deltatime;
     }
+   
+    Vec2 getPosition() const {
+        return worldPosition;
+    }
+    
+    int getHeight() const { return h; };
+    int getWidth() const { return w; };
 };
 
 class Game {
@@ -107,16 +136,21 @@ private:
     Display display;
     Player player;
     Timer timer;
+    Camera camera;
 
     void drawEntities() {
-        player.draw(display);
+        player.draw(display, camera);
     }
     void updateEntities(float deltatime) {
         player.update(deltatime);
     }
 public:
     
-    Game() : display("Hello"), player(), timer() {}
+    Game() : 
+        display("Hello"), 
+        player({200.0f, 200.0f}),
+        camera(),
+        timer() {}
 
     void start() {
         bool isRunning = true;
@@ -132,6 +166,10 @@ public:
             }
             float deltatime = timer.getDeltaTime();
             updateEntities(deltatime);
+            camera.followTarget(player.getPosition(), 
+                player.getWidth(), player.getHeight(),
+                );
+            
 
             display.clear();
    
