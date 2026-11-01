@@ -1,17 +1,8 @@
 #include "Vec2.hpp"
+#include "Entity.hpp"
+#include <SDL3/SDL.h>
 
-class Enemy {
-	Vec2 worldPosition;
-	int w;
-	int h;
-	float speed;
-	
-public:
-	Enemy(Vec2 pos) : worldPosition(pos), speed(200.0f) {}
-
-	void draw();
-	void update();
-		
-	
-	
+class Enemy : public Entity {   
+    void draw(Display& display, const Camera& camera) override;
+    void update(float deltatime) override;
 };

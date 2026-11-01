@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "Colors.hpp"
-
+class Entity;
 class Display {
 private:
     SDL_Window* window = nullptr;
@@ -16,6 +16,7 @@ public:
     void setDrawColor(SDL_Color color);
     void clear();
     void present();
+    void drawRect(SDL_FRect rect, SDL_Color color);
 
     SDL_Renderer* get_render() const { return renderer; }
     int getWidth() const { return windowW; }
