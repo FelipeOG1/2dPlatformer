@@ -3,6 +3,10 @@
 #include <SDL3/SDL.h>
 
 class Enemy : public Entity {   
+public:
+    
+    Enemy(Vec2 spawnPosition) : Entity(spawnPosition, 100, 100) {}
+        
     void draw(Display& display, const Camera& camera) override;
     void update(float deltatime) override;
 };

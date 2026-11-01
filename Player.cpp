@@ -3,30 +3,23 @@
 #include "Display.hpp"
 #include "Colors.hpp"
 
-SDL_FRect Player::getRect(const Vec2& cameraPosition) const {
-    return {
-        worldPosition.x - cameraPosition.x,
-        worldPosition.y - cameraPosition.y,
-        w,
-        h
-    };
-}
 
 void Player::draw(Display& display, const Camera& camera) {
-    SDL_FRect rect = getRect(camera.getCameraPosition());
-
-    display.setDrawColor(Colors::RED);
-    SDL_RenderFillRect(display.get_render(), &rect);
-
-    display.setDrawColor(Colors::GREEN);
-    SDL_RenderRect(display.get_render(), &rect);
+	Vec2 cameraPos = camera.getCameraPosition();
+	SDL_FRect rect = {
+		this->tc.worldPosition.x - cameraPos.x,
+		this->tc.worldPosition.y - cameraPos.y,
+		this->tc.w,
+		this->tc.h
+	};
+	
+	display.drawRect(rect, Colors::RED);
 }
-
 void Player::update(float deltatime) {
     const bool* keystate = SDL_GetKeyboardState(NULL);
-    if (keystate[SDL_SCANCODE_D]) worldPosition.x += speed * deltatime;
-    if (keystate[SDL_SCANCODE_A]) worldPosition.x -= speed * deltatime;
-    if (keystate[SDL_SCANCODE_S]) worldPosition.y += speed * deltatime;
-    if (keystate[SDL_SCANCODE_W]) worldPosition.y -= speed * deltatime;
+    if (keystate[SDL_SCANCODE_D]) this->tc.worldPosition.x += this->mc.speed * deltatime;
+    if (keystate[SDL_SCANCODE_A]) this->tc.worldPosition.x -= this->mc.speed * deltatime;
+    if (keystate[SDL_SCANCODE_S]) this->tc.worldPosition.y += this->mc.speed * deltatime;
+    if (keystate[SDL_SCANCODE_W]) this->tc.worldPosition.y -= this->mc.speed * deltatime;
     
 }

@@ -2,7 +2,7 @@
 #include <iostream>
 Game::Game()
     : display("2D Platformer", 600, 600),
-    player({ 200.0f, 200.0f }),
+    player({200.0f, 200.0f}),
     camera(),
     timer() {
 }
