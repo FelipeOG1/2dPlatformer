@@ -24,6 +24,17 @@ void Player::update(float deltatime, std::array<Entity*, MAX_NUM_ENTITIES>& enti
 	if (keystate[SDL_SCANCODE_W]) {
 		tc.worldPosition.y -= mc.speed * deltatime;
 	}
+	if (keystate[SDL_SCANCODE_A]) {
+		tc.worldPosition.x -= mc.speed * deltatime;
+	}
+	if (keystate[SDL_SCANCODE_S]) {
+		tc.worldPosition.y += mc.speed * deltatime;
+	}
+	
+	if (keystate[SDL_SCANCODE_D]) {
+		tc.worldPosition.x += mc.speed * deltatime;
+	}
+	
 		
     
 }

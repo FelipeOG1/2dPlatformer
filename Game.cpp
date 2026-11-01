@@ -1,20 +1,13 @@
 #include "Game.hpp"
 #include <iostream>
 void Game::drawEntities() {
-    for (int i = 0; i < entitiesCounter; i++) {
-        entities[i]->draw(display, camera);
-        
-    }
+    for (auto& entity : entities) entity->draw(display, camera);
 }
-
 
 void Game::updateEntities(float deltatime) {
-    for (int i = 0; i < entitiesCounter; i++) {
-        entities[i]->update(deltatime, entities);
-        
-    }
+    for (auto& entity : entities) entity->update(deltatime, entities);
+   
 }
-
 void Game::start() {
     bool isRunning = true;
     SDL_Event event;
