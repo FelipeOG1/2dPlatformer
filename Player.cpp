@@ -5,7 +5,7 @@
 #include "Engine.hpp"
 #include <array>
 #include "Constants.hpp"
-#include <iostream>
+#include "Bullet.hpp"
 void Player::draw(Display& display, const Camera& camera) {
 	Vec2 cameraPos = camera.getCameraPosition();
 	SDL_FRect rect = {
@@ -26,6 +26,7 @@ void Player::update(float deltatime, const std::vector<Entity*>& entities) {
             tc.worldPosition.y -= mc.speed * deltatime;
         }
     }
+   
     if (keystate[SDL_SCANCODE_S]) {
         if (!Engine::Collision::goingToColide(this, 0.0f, mc.speed * deltatime, entities)) {
             tc.worldPosition.y += mc.speed * deltatime;
@@ -42,5 +43,9 @@ void Player::update(float deltatime, const std::vector<Entity*>& entities) {
             tc.worldPosition.x += mc.speed * deltatime;
         }
     }
+    if (keystate[SDL_SCANCODE_P]) {
+        
+    }
+    
 }
 

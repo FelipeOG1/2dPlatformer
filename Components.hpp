@@ -2,10 +2,10 @@
 
 struct TransformComponent {
 	Vec2 worldPosition{ 0.0f, 0.0f };
-	int w{ 100 };
-	int h{ 100 };
+	int w{ 0 };
+	int h{ 0 };
 };
 
 struct MoveComponent {
-	float speed{ 200.0f };
+	float speed{ 0.0f };
 };

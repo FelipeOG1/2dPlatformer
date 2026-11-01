@@ -12,7 +12,7 @@ public:
     TransformComponent tc;
 	MoveComponent mc;
 
-	Entity(Vec2 spawnPosition, int w, int h) : tc{spawnPosition, w, h } {};
+	Entity(Vec2 spawnPosition, int w, int h, float speed) : tc{ spawnPosition, w, h }, mc{speed} {};
 
 	virtual ~Entity() = default;
 	virtual void draw(Display& display, const Camera& camera) = 0;

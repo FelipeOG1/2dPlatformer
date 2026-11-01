@@ -145,6 +145,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Components.cpp" />
     <ClCompile Include="Constants.hpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Colors.hpp" />
     <ClInclude Include="Components.hpp" />
