@@ -18,9 +18,9 @@ void Player::draw(Display& display, const Camera& camera) {
 	display.drawRect(rect, Colors::PINK);
 }
 
-void Player::update(float deltatime, std::array<Entity*, MAX_NUM_ENTITIES>& entities) {
+void Player::update(float deltatime, std::vector<Entity*> entities) {
     const bool* keystate = SDL_GetKeyboardState(NULL);
-	Vec2 currentPos = getPosition();
+	Vec2 currentPos = this->getPosition();
 	if (keystate[SDL_SCANCODE_W]) {
 		tc.worldPosition.y -= mc.speed * deltatime;
 	}

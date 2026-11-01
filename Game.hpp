@@ -26,7 +26,10 @@ public:
         enemy({ 400.0f, 400.0f }),
         camera(),
         timer() {
-        entities.reserve(MAX_NUM_ENTITIES);    
+        entities.reserve(MAX_NUM_ENTITIES);
+        entities.push_back(&player);
+        entities.push_back(&enemy);
+
     }
     void start();
 };
