@@ -14,5 +14,9 @@ void Enemy::draw(Display& display, const Camera& camera) {
 		this->tc.h
 	};
 	
-	display.drawRect(rect, Colors::RED);
+	display.drawRect(rect, Colors::PINK);
+}
+
+void Enemy::update(float deltatime,std::array<Entity*, MAX_NUM_ENTITIES>& entities ) {
+	
 }

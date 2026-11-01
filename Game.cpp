@@ -1,18 +1,18 @@
 #include "Game.hpp"
 #include <iostream>
-Game::Game()
-    : display("2D Platformer", 600, 600),
-    player({200.0f, 200.0f}),
-    camera(),
-    timer() {
+void Game::drawEntities() {
+    for (int i = 0; i < entitiesCounter; i++) {
+        entities[i]->draw(display, camera);
+        
+    }
 }
 
-void Game::drawEntities() {
-    player.draw(display, camera);
-}
 
 void Game::updateEntities(float deltatime) {
-    player.update(deltatime);
+    for (int i = 0; i < entitiesCounter; i++) {
+        entities[i]->update(deltatime, entities);
+        
+    }
 }
 
 void Game::start() {
@@ -30,7 +30,7 @@ void Game::start() {
 
         float deltatime = timer.getDeltaTime();
         updateEntities(deltatime);
-        std::cout << "Player x" << player.getPosition().x;
+        std::cout << "Player x" << player.getPosition().x << std::endl;
         
         camera.followTarget(player, display);
 

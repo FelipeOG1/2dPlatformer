@@ -8,5 +8,6 @@ public:
     Enemy(Vec2 spawnPosition) : Entity(spawnPosition, 100, 100) {}
         
     void draw(Display& display, const Camera& camera) override;
-    void update(float deltatime) override;
+    void update(float deltatime, std::array<Entity*, MAX_NUM_ENTITIES>& entities) override;
+
 };

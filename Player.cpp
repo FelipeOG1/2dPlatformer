@@ -2,8 +2,10 @@
 #include "Camera.hpp"
 #include "Display.hpp"
 #include "Colors.hpp"
-
-
+#include "Engine.hpp"
+#include <array>
+#include "Constants.hpp"
+#include <iostream>
 void Player::draw(Display& display, const Camera& camera) {
 	Vec2 cameraPos = camera.getCameraPosition();
 	SDL_FRect rect = {
@@ -13,13 +15,15 @@ void Player::draw(Display& display, const Camera& camera) {
 		this->tc.h
 	};
 	
-	display.drawRect(rect, Colors::RED);
+	display.drawRect(rect, Colors::PINK);
 }
-void Player::update(float deltatime) {
+
+void Player::update(float deltatime, std::array<Entity*, MAX_NUM_ENTITIES>& entities) {
     const bool* keystate = SDL_GetKeyboardState(NULL);
-    if (keystate[SDL_SCANCODE_D]) this->tc.worldPosition.x += this->mc.speed * deltatime;
-    if (keystate[SDL_SCANCODE_A]) this->tc.worldPosition.x -= this->mc.speed * deltatime;
-    if (keystate[SDL_SCANCODE_S]) this->tc.worldPosition.y += this->mc.speed * deltatime;
-    if (keystate[SDL_SCANCODE_W]) this->tc.worldPosition.y -= this->mc.speed * deltatime;
+	Vec2 currentPos = getPosition();
+	if (keystate[SDL_SCANCODE_W]) {
+		tc.worldPosition.y -= mc.speed * deltatime;
+	}
+		
     
 }
