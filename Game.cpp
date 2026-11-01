@@ -1,5 +1,5 @@
 #include "Game.hpp"
-
+#include <iostream>
 Game::Game()
     : display("2D Platformer", 600, 600),
     player({ 200.0f, 200.0f }),
@@ -30,6 +30,8 @@ void Game::start() {
 
         float deltatime = timer.getDeltaTime();
         updateEntities(deltatime);
+        std::cout << "Player x" << player.getPosition().x;
+        
         camera.followTarget(player, display);
 
         display.clear();

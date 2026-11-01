@@ -3,9 +3,6 @@
 #include "Display.hpp"
 #include "Colors.hpp"
 
-
-
-
 SDL_FRect Player::getRect(const Vec2& cameraPosition) const {
     return {
         worldPosition.x - cameraPosition.x,
@@ -31,4 +28,5 @@ void Player::update(float deltatime) {
     if (keystate[SDL_SCANCODE_A]) worldPosition.x -= speed * deltatime;
     if (keystate[SDL_SCANCODE_S]) worldPosition.y += speed * deltatime;
     if (keystate[SDL_SCANCODE_W]) worldPosition.y -= speed * deltatime;
+    
 }

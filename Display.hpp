@@ -17,7 +17,6 @@ public:
     void clear();
     void present();
 
-    // Getters en línea por rendimiento
     SDL_Renderer* get_render() const { return renderer; }
     int getWidth() const { return windowW; }
     int getHeight() const { return windowH; }
