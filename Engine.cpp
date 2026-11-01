@@ -1,18 +1,24 @@
 #include "Engine.hpp"
 #include "Player.hpp"
+
 namespace Engine {
-	
-	const bool Collision::goingToColide(Player* player, float dx, float dy, std::array<Entity*, MAX_NUM_ENTITIES>& entities) {
-		Vec2 playerPos = player->getPosition();
-		for (const auto& entity : entities) {
-			Vec2 currentEntityPos = entity->getPosition();
-			if (playerPos.x + dx < currentEntityPos.x + entity->tc.w &&
-				playerPos.x + player->tc.w + dx> currentEntityPos.x &&
-				playerPos.y + dy < currentEntityPos.y + entity->tc.h &&
-				playerPos.y + player->tc.h + dy > currentEntityPos.y
-				) return true;
-		}
-		return false;
-	}
-		
-	}
+    const bool Collision::goingToColide(Entity* entity, float dx, float dy, const std::vector<Entity*>& entities) {
+        Vec2 entityPos = entity->getPosition();
+
+        for (const auto& currentEntity : entities) {
+            if (currentEntity == entity) continue;
+
+            Vec2 currentEntityPos = currentEntity->getPosition();
+            
+            if (entityPos.x + dx < currentEntityPos.x + currentEntity->tc.w &&
+                entityPos.x + entity->tc.w + dx > currentEntityPos.x &&
+                entityPos.y + dy < currentEntityPos.y + currentEntity->tc.h &&
+                entityPos.y + entity->tc.h + dy > currentEntityPos.y)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}

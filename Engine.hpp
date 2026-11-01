@@ -1,12 +1,11 @@
 #pragma once
-#include <array>
 #include "Constants.hpp"
+#include <vector>
 class Player;
 class Entity;
+
 namespace Engine {
-	
 	namespace Collision {
-		const bool goingToColide(Player* player, float dx, float dy, std::array<Entity*, MAX_NUM_ENTITIES>& entities);
-		
+		const bool goingToColide(Entity* entity, float dx, float dy, const std::vector<Entity*>& entities);
 	};
 }

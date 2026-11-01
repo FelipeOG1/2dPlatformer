@@ -18,23 +18,29 @@ void Player::draw(Display& display, const Camera& camera) {
 	display.drawRect(rect, Colors::PINK);
 }
 
-void Player::update(float deltatime, std::vector<Entity*> entities) {
-    const bool* keystate = SDL_GetKeyboardState(NULL);
-	Vec2 currentPos = this->getPosition();
-	if (keystate[SDL_SCANCODE_W]) {
-		tc.worldPosition.y -= mc.speed * deltatime;
-	}
-	if (keystate[SDL_SCANCODE_A]) {
-		tc.worldPosition.x -= mc.speed * deltatime;
-	}
-	if (keystate[SDL_SCANCODE_S]) {
-		tc.worldPosition.y += mc.speed * deltatime;
-	}
-	
-	if (keystate[SDL_SCANCODE_D]) {
-		tc.worldPosition.x += mc.speed * deltatime;
-	}
-	
-		
-    
+void Player::update(float deltatime, const std::vector<Entity*>& entities) {
+    const bool* keystate = SDL_GetKeyboardState(NULL); 
+
+    if (keystate[SDL_SCANCODE_W]) {
+        if (!Engine::Collision::goingToColide(this, 0.0f, -mc.speed * deltatime, entities)) {
+            tc.worldPosition.y -= mc.speed * deltatime;
+        }
+    }
+    if (keystate[SDL_SCANCODE_S]) {
+        if (!Engine::Collision::goingToColide(this, 0.0f, mc.speed * deltatime, entities)) {
+            tc.worldPosition.y += mc.speed * deltatime;
+        }
+    }
+
+    if (keystate[SDL_SCANCODE_A]) {
+        if (!Engine::Collision::goingToColide(this, -mc.speed * deltatime, 0.0f, entities)) {
+            tc.worldPosition.x -= mc.speed * deltatime;
+        }
+    }
+    if (keystate[SDL_SCANCODE_D]) {
+        if (!Engine::Collision::goingToColide(this, mc.speed * deltatime, 0.0f, entities)) {
+            tc.worldPosition.x += mc.speed * deltatime;
+        }
+    }
 }
+
