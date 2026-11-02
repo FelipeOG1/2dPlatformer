@@ -16,6 +16,8 @@ void Bullet::draw(Display& display, const Camera& camera) {
 	display.drawRect(rect, Colors::GREEN);
 }
 void Bullet::update(float deltatime) {
+	if (!active) return;
 	tc.worldPosition.x += mc.speed * deltatime;
+	
 }
 

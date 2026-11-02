@@ -8,6 +8,9 @@
 #include "Game.hpp"
 #include "Bullet.hpp"
 
+void Player::shoot() {
+   gameContext->spawnBullet(getPosition());
+}
 void Player::draw(Display& display, const Camera& camera) {
 	Vec2 cameraPos = camera.getCameraPosition();
 	SDL_FRect rect = {
@@ -45,6 +48,8 @@ void Player::update(float deltatime) {
             tc.worldPosition.x += mc.speed * deltatime;
         }
     }
-    
-    
+    if (keystate[SDL_SCANCODE_P]) {
+        shoot();
+    }
+       
 }
