@@ -1,6 +1,5 @@
 #pragma once
 #include "Vec2.hpp"
-// Declaración adelantada para evitar dependencias circulares
 class Player;
 class Display;
 class Entity;
