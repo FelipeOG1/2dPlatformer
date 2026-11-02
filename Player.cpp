@@ -44,7 +44,7 @@ void Player::update(float deltatime, const std::vector<Entity*>& entities) {
         }
     }
     if (keystate[SDL_SCANCODE_P]) {
-        
+      
     }
     
 }

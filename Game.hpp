@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Bullet.hpp"
 #include "Display.hpp"
 #include "Player.hpp"
 #include "Timer.hpp"
@@ -8,6 +8,8 @@
 #include "Constants.hpp"
 #include "Entity.hpp"
 #include <vector>
+#include <array>
+
 class Game {
 private:
     Display display;
@@ -20,6 +22,7 @@ private:
 public:
     
     std::vector<Entity*> entities; 
+    std::array<Bullet, MAX_NUM_ENTITIES> bullets;
     Game() :
         display("2D Platformer", 600, 600),
         player({ 200.0f, 200.0f }),
