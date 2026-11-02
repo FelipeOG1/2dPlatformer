@@ -5,7 +5,7 @@ void Game::drawEntities() {
 }
 
 void Game::updateEntities(float deltatime) {
-    for (auto& entity : entities) entity->update(deltatime, entities);
+    for (auto& entity : entities) entity->update(deltatime);
    
 }
 void Game::start() {
@@ -23,6 +23,7 @@ void Game::start() {
 
         float deltatime = timer.getDeltaTime();
         updateEntities(deltatime);
+        
         std::cout << "Player x" << player.getPosition().x << std::endl;
         
         camera.followTarget(player, display);

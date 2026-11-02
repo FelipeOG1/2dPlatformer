@@ -5,7 +5,9 @@
 #include "Engine.hpp"
 #include <array>
 #include "Constants.hpp"
+#include "Game.hpp"
 #include "Bullet.hpp"
+
 void Player::draw(Display& display, const Camera& camera) {
 	Vec2 cameraPos = camera.getCameraPosition();
 	SDL_FRect rect = {
@@ -18,34 +20,31 @@ void Player::draw(Display& display, const Camera& camera) {
 	display.drawRect(rect, Colors::PINK);
 }
 
-void Player::update(float deltatime, const std::vector<Entity*>& entities) {
+void Player::update(float deltatime) {
     const bool* keystate = SDL_GetKeyboardState(NULL); 
 
     if (keystate[SDL_SCANCODE_W]) {
-        if (!Engine::Collision::goingToColide(this, 0.0f, -mc.speed * deltatime, entities)) {
+        if (!Engine::Collision::goingToColide(this, 0.0f, -mc.speed * deltatime, gameContext->getEntities())) {
             tc.worldPosition.y -= mc.speed * deltatime;
         }
     }
    
     if (keystate[SDL_SCANCODE_S]) {
-        if (!Engine::Collision::goingToColide(this, 0.0f, mc.speed * deltatime, entities)) {
+        if (!Engine::Collision::goingToColide(this, 0.0f, mc.speed * deltatime, gameContext->getEntities())) {
             tc.worldPosition.y += mc.speed * deltatime;
         }
     }
 
     if (keystate[SDL_SCANCODE_A]) {
-        if (!Engine::Collision::goingToColide(this, -mc.speed * deltatime, 0.0f, entities)) {
+        if (!Engine::Collision::goingToColide(this, -mc.speed * deltatime, 0.0f, gameContext->getEntities())) {
             tc.worldPosition.x -= mc.speed * deltatime;
         }
     }
     if (keystate[SDL_SCANCODE_D]) {
-        if (!Engine::Collision::goingToColide(this, mc.speed * deltatime, 0.0f, entities)) {
+        if (!Engine::Collision::goingToColide(this, mc.speed * deltatime, 0.0f, gameContext->getEntities())) {
             tc.worldPosition.x += mc.speed * deltatime;
         }
     }
-    if (keystate[SDL_SCANCODE_P]) {
-      
-    }
+    
     
 }
-

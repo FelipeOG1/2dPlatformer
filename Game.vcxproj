@@ -147,7 +147,6 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Components.cpp" />
     <ClCompile Include="Constants.hpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Enemy.cpp" />

@@ -16,7 +16,7 @@ public:
 
 	virtual ~Entity() = default;
 	virtual void draw(Display& display, const Camera& camera) = 0;
-	virtual void update(float deltatime, const std::vector<Entity*>& entities) = 0;
+	virtual void update(float deltatime) = 0;
 	
 	Vec2& getPosition() { return tc.worldPosition; };
 	const Vec2& getPosition() const { return tc.worldPosition; };

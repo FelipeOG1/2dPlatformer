@@ -5,6 +5,7 @@
 #include "Vec2.hpp"
 #include "Colors.hpp"
 void Bullet::draw(Display& display, const Camera& camera) {
+	if (!active) return;
 	Vec2 cameraPos = camera.getCameraPosition();
     SDL_FRect rect = {
 		this->tc.worldPosition.x - cameraPos.x,
@@ -14,7 +15,7 @@ void Bullet::draw(Display& display, const Camera& camera) {
 	};
 	display.drawRect(rect, Colors::GREEN);
 }
-void Bullet::update(float deltatime, const std::vector<Entity*>& entities) {
-	   
+void Bullet::update(float deltatime) {
+	tc.worldPosition.x += mc.speed * deltatime;
 }
 
