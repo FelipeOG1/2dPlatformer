@@ -4,6 +4,7 @@
 #include <SDL3/SDL.H>
 #include "Vec2.hpp"
 #include "Colors.hpp"
+
 void Bullet::draw(Display& display, const Camera& camera) {
 	if (!active) return;
 	Vec2 cameraPos = camera.getCameraPosition();
@@ -15,9 +16,8 @@ void Bullet::draw(Display& display, const Camera& camera) {
 	};
 	display.drawRect(rect, Colors::GREEN);
 }
+
 void Bullet::update(float deltatime) {
 	if (!active) return;
 	tc.worldPosition.x += mc.speed * deltatime;
-	
 }
-
