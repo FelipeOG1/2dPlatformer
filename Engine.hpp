@@ -6,6 +6,6 @@ class Entity;
 
 namespace Engine {
 	namespace Collision {
-		const bool goingToColide(Entity* entity, float dx, float dy, const std::vector<Entity*>& entities);
+		const Entity* goingToColide(Entity* entity, float dx, float dy, const std::vector<Entity*>& entities);
 	};
 }

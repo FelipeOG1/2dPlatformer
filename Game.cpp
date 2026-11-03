@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include <iostream>
-#include "Engine.hpp"
+#include "Vec2.hpp"
+
 void Game::spawnBullet(Vec2 pos) {
     for (Bullet& bullet : bullets) {
         if (!bullet.is_active()) {
@@ -11,9 +12,8 @@ void Game::spawnBullet(Vec2 pos) {
     }
 }
 
-bool Game::goingToColide(Entity* entity, float dx, float dy) {
-    return Engine::Collision::goingToColide(entity, dx, dy, entities);
-    
+const Entity* Game::goingToColide(Entity* entity, float dx, float dy) {
+    return Engine::Collision::goingToColide(entity, dx, dy, entities);   
 }
 
 void Game::drawEntities() {
@@ -45,7 +45,6 @@ void Game::start() {
         float deltatime = timer.getDeltaTime();
         updateEntities(deltatime);
         
-        std::cout << "Player x" << player.getPosition().x << std::endl;
         
         camera.followTarget(player, display);
 

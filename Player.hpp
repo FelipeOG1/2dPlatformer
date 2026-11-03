@@ -16,7 +16,7 @@ private:
 
 public:
     Player(Vec2 spawnPosition, Game* context)
-        : gameContext(context), Entity(spawnPosition, 100, 100, 200.0f) {
+        : gameContext(context), Entity(spawnPosition, 100, 100, 200.0f, T_PLAYER) {
     }
     
     void shoot();

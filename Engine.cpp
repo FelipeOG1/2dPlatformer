@@ -2,7 +2,7 @@
 #include "Player.hpp"
 
 namespace Engine {
-    const bool Collision::goingToColide(Entity* entity, float dx, float dy, const std::vector<Entity*>& entities) {
+    const Entity* Collision::goingToColide(Entity* entity, float dx, float dy, const std::vector<Entity*>& entities) {
         Vec2 entityPos = entity->getPosition();
 
         for (const auto& currentEntity : entities) {
@@ -15,10 +15,10 @@ namespace Engine {
                 entityPos.y + dy < currentEntityPos.y + currentEntity->tc.h &&
                 entityPos.y + entity->tc.h + dy > currentEntityPos.y)
             {
-                return true;
+                return currentEntity;
             }
         }
 
-        return false;
+        return nullptr;
     }
 }

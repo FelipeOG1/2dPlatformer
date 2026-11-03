@@ -1,14 +1,18 @@
 #pragma once
-#include "Bullet.hpp"
-#include "Display.hpp"
-#include "Player.hpp"
-#include "Timer.hpp"
-#include "Camera.hpp"
-#include "Enemy.hpp"
 #include "Constants.hpp"
-#include "Entity.hpp"
 #include <vector>
 #include <array>
+#include "Engine.hpp"
+#include "Bullet.hpp"
+#include "Enemy.hpp"
+#include "Entity.hpp"
+#include "Player.hpp"
+#include "Display.hpp"
+#include "Camera.hpp"
+#include "Timer.hpp"
+#include "Vec2.hpp"
+
+
 
 class Game {
 private:
@@ -33,11 +37,12 @@ public:
         entities.reserve(MAX_NUM_ENTITIES);
         entities.push_back(&player);
         entities.push_back(&enemy);
+        for (Bullet& b : bullets) b.setGameContext(this);     
     }
     void start();
     std::vector<Entity*>& getEntities() { return entities; }
     void spawnBullet(Vec2 pos);
-    bool goingToColide(Entity* entity, float dx, float dy);
+    const Entity* goingToColide(Entity* entity, float dx, float dy);
     
 };
 
