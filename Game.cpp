@@ -1,6 +1,6 @@
 #include "Game.hpp"
 #include <iostream>
-
+#include "Engine.hpp"
 void Game::spawnBullet(Vec2 pos) {
     for (Bullet& bullet : bullets) {
         if (!bullet.is_active()) {
@@ -9,6 +9,11 @@ void Game::spawnBullet(Vec2 pos) {
             break;
         }
     }
+}
+
+bool Game::goingToColide(Entity* entity, float dx, float dy) {
+    return Engine::Collision::goingToColide(entity, dx, dy, entities);
+    
 }
 
 void Game::drawEntities() {

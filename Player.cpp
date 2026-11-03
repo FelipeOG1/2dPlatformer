@@ -27,24 +27,24 @@ void Player::update(float deltatime) {
     const bool* keystate = SDL_GetKeyboardState(NULL); 
 
     if (keystate[SDL_SCANCODE_W]) {
-        if (!Engine::Collision::goingToColide(this, 0.0f, -mc.speed * deltatime, gameContext->getEntities())) {
+        if (!gameContext->goingToColide(this, 0.0f, -mc.speed * deltatime)) {
             tc.worldPosition.y -= mc.speed * deltatime;
         }
     }
    
     if (keystate[SDL_SCANCODE_S]) {
-        if (!Engine::Collision::goingToColide(this, 0.0f, mc.speed * deltatime, gameContext->getEntities())) {
+        if (!gameContext->goingToColide(this, 0.0f, mc.speed * deltatime)) {
             tc.worldPosition.y += mc.speed * deltatime;
         }
     }
 
     if (keystate[SDL_SCANCODE_A]) {
-        if (!Engine::Collision::goingToColide(this, -mc.speed * deltatime, 0.0f, gameContext->getEntities())) {
+        if (!gameContext->goingToColide(this, -mc.speed * deltatime, 0.0f)) {
             tc.worldPosition.x -= mc.speed * deltatime;
         }
     }
     if (keystate[SDL_SCANCODE_D]) {
-        if (!Engine::Collision::goingToColide(this, mc.speed * deltatime, 0.0f, gameContext->getEntities())) {
+        if (!gameContext->goingToColide(this, mc.speed * deltatime, 0.0f)) {
             tc.worldPosition.x += mc.speed * deltatime;
         }
     }

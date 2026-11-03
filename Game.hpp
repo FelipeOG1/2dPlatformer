@@ -37,6 +37,7 @@ public:
     void start();
     std::vector<Entity*>& getEntities() { return entities; }
     void spawnBullet(Vec2 pos);
+    bool goingToColide(Entity* entity, float dx, float dy);
     
 };
 
