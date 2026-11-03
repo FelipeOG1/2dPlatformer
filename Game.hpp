@@ -21,10 +21,8 @@ private:
     Timer timer;
     Camera camera;
     Enemy enemy;
-    
     std::vector<Entity*> entities; 
     std::array<Bullet, MAX_NUM_BULLETS> bullets;
-    
     void drawEntities();
     void updateEntities(float deltatime);
 public:

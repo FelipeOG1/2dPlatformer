@@ -9,7 +9,11 @@
 #include "Bullet.hpp"
 
 void Player::shoot() {
-   gameContext->spawnBullet(getPosition());
+    if (fireTimer <= 0.0f) {
+        gameContext->spawnBullet(getPosition());
+        fireTimer += 0.15f;
+    }
+   
 }
 void Player::draw(Display& display, const Camera& camera) {
 	Vec2 cameraPos = camera.getCameraPosition();
@@ -24,8 +28,11 @@ void Player::draw(Display& display, const Camera& camera) {
 }
 
 void Player::update(float deltatime) {
-    const bool* keystate = SDL_GetKeyboardState(NULL); 
-
+    const bool* keystate = SDL_GetKeyboardState(NULL);
+    if (fireTimer > 0.0f) {
+        fireTimer -= deltatime;
+    }
+  
     if (keystate[SDL_SCANCODE_W]) {
         if (!gameContext->goingToColide(this, 0.0f, -mc.speed * deltatime)) {
             tc.worldPosition.y -= mc.speed * deltatime;
