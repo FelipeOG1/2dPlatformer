@@ -1,18 +1,29 @@
 #include "Game.hpp"
-#include <iostream>
 #include "Vec2.hpp"
+#include "Colors.hpp"
+#include <iostream>
 
-void Game::spawnBullet(Vec2 pos) {
+//testing effects
+
+void Game::tDamage(Entity* inflictor, Entity* attacker, float damage) {
+    inflictor->takeDamage(damage);
+    if (inflictor->hc.health <= 0.0f) {
+        inflictor->setActive(false);
+    }
+}
+
+void Game::spawnBullet(Vec2 pos, Entity* shooter) {
     for (Bullet& bullet : bullets) {
-        if (!bullet.is_active()) {
-            bullet.set_active(true);
+        if (!bullet.isActive()) {
+            bullet.setActive(true);
             bullet.tc.worldPosition = pos;
+            bullet.setShooter(shooter);
             break;
         }
     }
 }
 
-const Entity* Game::goingToColide(Entity* entity, float dx, float dy) {
+Entity* Game::goingToColide(Entity* entity, float dx, float dy) {
     return Engine::Collision::goingToColide(entity, dx, dy, entities);   
 }
 
