@@ -83,5 +83,8 @@
     <ClInclude Include="Bullet.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Weapon.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

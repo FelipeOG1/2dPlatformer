@@ -7,15 +7,18 @@
 #include "Constants.hpp"
 #include "Game.hpp"
 #include "Bullet.hpp"
+#include "Components.hpp"
 
 void Player::shoot() {
     if (fireTimer <= 0.0f) {
-        gameContext->spawnBullet(getPosition());
-        fireTimer += 0.15f;
+        Vec2 pos = getPosition();
+        pos.x += tc.w;
+        gameContext->spawnBullet(pos, this);
+        fireTimer += fireRate;
     }
-   
 }
 void Player::draw(Display& display, const Camera& camera) {
+    if (!isActive()) return;
 	Vec2 cameraPos = camera.getCameraPosition();
 	SDL_FRect rect = {
 		this->tc.worldPosition.x - cameraPos.x,
@@ -24,10 +27,11 @@ void Player::draw(Display& display, const Camera& camera) {
 		this->tc.h
 	};
 	
-	display.drawRect(rect, Colors::PINK);
+	display.drawRect(rect, vc.color);
 }
 
 void Player::update(float deltatime) {
+    if (!isActive()) return;
     const bool* keystate = SDL_GetKeyboardState(NULL);
     if (fireTimer > 0.0f) {
         fireTimer -= deltatime;
@@ -44,7 +48,7 @@ void Player::update(float deltatime) {
             tc.worldPosition.y += mc.speed * deltatime;
         }
     }
-
+    
     if (keystate[SDL_SCANCODE_A]) {
         if (!gameContext->goingToColide(this, -mc.speed * deltatime, 0.0f)) {
             tc.worldPosition.x -= mc.speed * deltatime;
@@ -55,7 +59,7 @@ void Player::update(float deltatime) {
             tc.worldPosition.x += mc.speed * deltatime;
         }
     }
-    if (keystate[SDL_SCANCODE_P]) {
+    if (keystate[SDL_SCANCODE_P] && fireTimer <= 0.0f) {
         shoot();
     }
        

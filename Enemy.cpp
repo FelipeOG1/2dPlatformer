@@ -6,6 +6,7 @@
 #include <SDL3/SDL.h>
 
 void Enemy::draw(Display& display, const Camera& camera) {
+	if (!isActive()) return;
 	Vec2 cameraPos = camera.getCameraPosition();
 	SDL_FRect rect = {
 		this->tc.worldPosition.x - cameraPos.x,
@@ -14,9 +15,9 @@ void Enemy::draw(Display& display, const Camera& camera) {
 		this->tc.h
 	};
 	
-	display.drawRect(rect, Colors::PINK);
+	display.drawRect(rect, vc.color);
 }
 
 void Enemy::update(float deltatime) {
-	
+	if (!isActive()) return;
 }

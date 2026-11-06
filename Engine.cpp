@@ -2,11 +2,11 @@
 #include "Player.hpp"
 
 namespace Engine {
-    const Entity* Collision::goingToColide(Entity* entity, float dx, float dy, const std::vector<Entity*>& entities) {
+    Entity* Collision::goingToColide(Entity* entity, float dx, float dy, const std::vector<Entity*>& entities) {
         Vec2 entityPos = entity->getPosition();
 
         for (const auto& currentEntity : entities) {
-            if (currentEntity == entity) continue;
+            if (currentEntity == entity || !currentEntity->isActive()) continue;
 
             Vec2 currentEntityPos = currentEntity->getPosition();
             
