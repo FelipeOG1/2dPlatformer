@@ -8,7 +8,7 @@
 #include  <iostream>
 
 void Bullet::draw(Display& display, const Camera& camera) {
-	if (!active) return;
+	if (!isActive()) return;
 	Vec2 cameraPos = camera.getCameraPosition();
     SDL_FRect rect = {
 		this->tc.worldPosition.x - cameraPos.x,
@@ -20,13 +20,17 @@ void Bullet::draw(Display& display, const Camera& camera) {
 }
 
 void Bullet::update(float deltatime) {
-	if (!active) return;
+	if (!isActive()) return;
+	
 	float currentMovement = mc.speed * deltatime;
 	
-	const Entity* colidingWith = gameContext->goingToColide(this, currentMovement, 0.0f);
+    Entity* colidingWith = gameContext->goingToColide(this, currentMovement, 0.0f);
+	
 	if (colidingWith && colidingWith->type == T_ENEMY) {
-		active = false;
+		setActive(false);
+		if (colidingWith->canTakeDamage) {
+			gameContext->tDamage(colidingWith, shooter, bulletDamage);
+		}
 	}
 	tc.worldPosition.x += currentMovement;
 }
-
