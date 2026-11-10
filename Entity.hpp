@@ -17,12 +17,14 @@ public:
 		T_ENEMY,
 		T_BULLET
 	} type;
-	
+
+    
   TransformComponent tc;
 	MoveComponent mc;
 	HealthComponent hc;
 	VisualComponent vc;
 	bool canTakeDamage;
+  bool isHit = false;
 	Entity(Vec2 spawnPosition, int w, int h, float speed, EntityType type, bool canTakeDamage, bool active) :
 		canTakeDamage(canTakeDamage),
 		active(active),

@@ -16,6 +16,7 @@ void Game::initEnemies(int nEnemies) {
 }
 void Game::tDamage(Entity* inflictor, Entity* attacker, float damage) {
     inflictor->takeDamage(damage);
+    inflictor->isHit = true;
     if (inflictor->hc.health <= 0.0f) {
         inflictor->setActive(false);
         
