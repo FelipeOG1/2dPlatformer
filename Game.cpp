@@ -2,12 +2,13 @@
 #include "Vec2.hpp"
 #include "Colors.hpp"
 #include <iostream>
-
+#include "Constants.hpp"
 //testing effects
 
 void Game::initEnemies(int nEnemies) {
   float yPos{400.0f}, xPos{400.0f};
-  for (int i=0; i < 20; ++i, yPos+=200) {
+  
+  for (int i=0; i < std::min(nEnemies, MAX_ENEMIES); ++i, yPos+=200) {
     Enemy& currEnemy = enemies[i];
     currEnemy.setPosition({xPos, yPos}); currEnemy.setActive(true);
     entities.push_back(&currEnemy);
