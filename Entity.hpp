@@ -18,7 +18,7 @@ public:
 		T_BULLET
 	} type;
 	
-    TransformComponent tc;
+  TransformComponent tc;
 	MoveComponent mc;
 	HealthComponent hc;
 	VisualComponent vc;
