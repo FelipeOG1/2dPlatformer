@@ -15,5 +15,5 @@ public:
 
     void draw(Display& display, const Camera& camera) override;
     void update(float deltatime) override;   
-    void onHitAnimation(float deltatime);
+    void startHitAnimation(float deltatime);
 };

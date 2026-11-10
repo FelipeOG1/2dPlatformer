@@ -37,9 +37,8 @@ public:
 	virtual void draw(Display& display, const Camera& camera) = 0;
 	virtual void update(float deltatime) = 0;
 	
-	void takeDamage(float damage) {
-		hc.health -= damage;
-	}
+	void takeDamage(float damage) { hc.health -= damage; }
+
 	
 	Vec2& getPosition() { return tc.worldPosition; }
 	const Vec2& getPosition() const { return tc.worldPosition; }

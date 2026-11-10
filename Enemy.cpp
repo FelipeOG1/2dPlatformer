@@ -17,7 +17,7 @@ void Enemy::draw(Display& display, const Camera& camera) {
 	
 	display.drawRect(rect, vc.color);
 }
-void Enemy::onHitAnimation(float deltatime) {
+void Enemy::startHitAnimation(float deltatime) {
   setColor(Colors::RED);
   animationTimer += deltatime;
   if (animationTimer > 0.14f) {
@@ -29,7 +29,7 @@ void Enemy::onHitAnimation(float deltatime) {
 void Enemy::update(float deltatime) {
   if (!isActive()) return;
   if (isHit) {
-    onHitAnimation(deltatime);
+    startHitAnimation(deltatime);
   }
     
 }
